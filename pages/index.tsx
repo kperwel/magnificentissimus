@@ -12,7 +12,7 @@ import {
   DragStartEvent,
 } from "@dnd-kit/core";
 import { AttributeCard } from "@/components/AttributeCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Draggable } from "@/components/dnd/Draggable";
 import { Attribute, Person } from "@/model/Person";
 import Background from "@/components/svg/Background";
@@ -22,25 +22,26 @@ const dancingScript = Dancing_Script({
 });
 
 export default function Home() {
-  const [state, setState] = useState(tree);
+  const [used, setUsed] = useState<Array<[number, Attribute]>>([]);
   const [activeId, setActiveId] = useState<Attribute | null>(null);
   function handleDragStart(event: DragStartEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
     setActiveId(attribute);
   }
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   function handleDragEnd(event: DragEndEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
+    console.log(event)
     if (event.over && event.over.data.current) {
-      setState(changeAttribute(state, event.over.data.current.id, attribute));
+      setUsed([...used, [event.over.data.current.id, attribute]]);
     }
     setActiveId(null);
   }
 
+  const state = used.reduce(
+    (currentState, setter) => changeAttribute(currentState, setter[0], setter[1]),
+    tree
+  );
   return (
     <>
       <Head>
@@ -53,6 +54,7 @@ export default function Home() {
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <main className={`${styles.main} ${dancingScript.className}`}>
           <Tree>
+            {JSON.stringify(used)}
             <Unit person={state} />
           </Tree>
           <div className={styles.attributes}>
@@ -61,11 +63,12 @@ export default function Home() {
                 ...(state.targetAttributes ?? []),
                 Attribute.Bad,
                 Attribute.Fattiness,
-              ].map((a) => (
-                <Draggable attribute={a} key={a} className={styles.card}>
-                  <AttributeCard attribute={a} />
-                </Draggable>
-              ))}
+              ].filter(attribute => !used.map(used => used[1]).includes(attribute))
+                .map((a) => (
+                  <Draggable attribute={a} key={a}>
+                    <AttributeCard attribute={a} />
+                  </Draggable>
+                ))}
             </div>
 
             <Background className={styles.background} />

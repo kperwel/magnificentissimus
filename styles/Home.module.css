@@ -7,7 +7,7 @@
 }
 
 .attributes {
-  padding: 50px 0;
+  padding: 40px 0 10px 0;
   position: relative;
   overflow: hidden;
   margin-top: -50px;
@@ -22,15 +22,6 @@
   z-index: 2;
 }
 
-.card {
-  margin: 10px;
-  background: red;
-  border-radius: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 100px;
-}
 
 .background {
   position: absolute;

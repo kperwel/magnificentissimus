@@ -1,6 +1,5 @@
 .text {
-    size: 3em;
-    font-size: 50px;
+    font-size: 100px;
     text-anchor: middle;
     text-align: center;
 }

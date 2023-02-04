@@ -20,7 +20,7 @@ function KingTitle({ title }: { title: string }) {
         d="M873 319.5c-12.418 0-22.5-6.049-22.5-13.5h-495c0 7.451-10.082 13.5-22.5 13.5v27c12.418 0 22.5 6.049 22.5 13.5h495c0-7.451 10.082-13.5 22.5-13.5v-27z"
         transform="translate(-255.729 -447.579) matrix(1.1 0 0 1.83333 -105.3 -108.15)"
       ></path>
-      <text className={styles.text} x="50%" y="50%" textAnchor="middle">{title}</text>
+      <text className={styles.text} x="50%" y="80%" textAnchor="middle">{title}</text>
     </svg>
   );
 }

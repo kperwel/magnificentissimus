@@ -4,11 +4,9 @@ import { Attribute } from "@/model/Person";
 
 export function Draggable({
   children,
-  className,
   attribute,
 }: {
   children: ReactNode;
-  className: string;
   attribute: Attribute;
 }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -26,7 +24,6 @@ export function Draggable({
   return (
     <div
       ref={setNodeRef}
-      className={className}
       style={style}
       {...listeners}
       {...attributes}
