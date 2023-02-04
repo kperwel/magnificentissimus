@@ -5,9 +5,10 @@
   flex: 1;
   padding: 10px;
   scroll-snap-type: both mandatory;
+  scroll-padding-top: 20px;
 }
 
 .inside {
     width: 1000px;
-    margin: 100px auto 100px;
+    margin: 100px;
 }

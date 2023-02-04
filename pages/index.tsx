@@ -14,7 +14,7 @@ import {
 import { AttributeCard } from "@/components/AttributeCard";
 import { useState } from "react";
 import { Draggable } from "@/components/dnd/Draggable";
-import { Attribute, Person } from "@/model/Person";
+import { Attribute, getAllAttributes, Person } from "@/model/Person";
 import Background from "@/components/svg/Background";
 
 const dancingScript = Dancing_Script({
@@ -31,9 +31,9 @@ export default function Home() {
 
   function handleDragEnd(event: DragEndEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
-    console.log(event)
     if (event.over && event.over.data.current) {
-      setUsed([...used, [event.over.data.current.id, attribute]]);
+      const personId = event.over.data.current.id as number;
+      setUsed([...used, [personId, attribute]]);
     }
     setActiveId(null);
   }
@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>The Thest</title>
+        <title>The Magnificentissimus</title>
         <meta name="description" content="The Thest" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -62,8 +62,7 @@ export default function Home() {
                 ...(state.targetAttributes ?? []),
                 Attribute.Bad,
                 Attribute.Fattiness,
-              ].filter(attribute => !used.map(used => used[1]).includes(attribute))
-                .map((a) => (
+              ].map((a) => (
                   <Draggable attribute={a} key={a}>
                     <AttributeCard attribute={a} />
                   </Draggable>

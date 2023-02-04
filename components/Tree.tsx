@@ -8,7 +8,7 @@ export const Tree = ({ children }: { children: ReactNode }) => {
     if (!tree.current) {
       return;
     }
-    tree.current.scrollTo(200, 0);
+    tree.current.scrollTo(tree.current.scrollWidth / 2 - tree.current.clientWidth / 2, 0);
   }, [tree]);
 
   return (
