@@ -54,7 +54,6 @@ export default function Home() {
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <main className={`${styles.main} ${dancingScript.className}`}>
           <Tree>
-            {JSON.stringify(used)}
             <Unit person={state} />
           </Tree>
           <div className={styles.attributes}>
