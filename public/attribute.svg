@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 310 363" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-390.729,-1240.39)">
+        <g transform="matrix(1,0,0,1,0,-666.499)">
+            <g transform="matrix(0.852894,2.04803e-18,-3.07204e-18,-1.25426,404.594,4210.17)">
+                <path d="M287.482,1579.78C248.107,1574.98 209.271,1566.44 171.794,1548.99C167.93,1547.19 162.871,1547.1 158.882,1548.77C119.648,1565.17 80.847,1574.07 42.25,1579.84C36.811,1580.65 32.937,1583.93 32.937,1587.72L32.937,1828.31C32.937,1832.76 38.247,1836.38 44.796,1836.38L285.389,1836.38C291.939,1836.38 297.248,1832.76 297.248,1828.31L297.248,1587.72C297.248,1583.81 293.134,1580.47 287.482,1579.78ZM273.53,1594.39C273.53,1594.39 273.53,1820.25 273.53,1820.25L56.656,1820.25C56.656,1779.06 56.656,1594.14 56.656,1594.14C92.466,1588.32 128.436,1579.67 164.767,1565.18C200.152,1580.74 236.575,1589.29 273.53,1594.39Z" style="fill:rgb(255,155,0);"/>
+                <path d="M285.389,1587.72C244.435,1582.72 204.072,1573.79 165.093,1555.64C124.62,1572.56 84.611,1581.77 44.796,1587.72L44.796,1828.31L285.389,1828.31L285.389,1587.72Z" style="fill:rgb(51,6,0);"/>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,1,0,-666.499)">
+            <g transform="matrix(0.553333,0,0,1.83333,211.74,1524.12)">
+                <path d="M873,319.5C873,312.049 852.958,306 828.271,306L377.729,306C353.042,306 333,312.049 333,319.5L333,346.5C333,353.951 353.042,360 377.729,360L828.271,360C852.958,360 873,353.951 873,346.5L873,319.5Z" style="fill:rgb(98,12,0);stroke:url(#_Radial1);stroke-width:7.78px;"/>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <radialGradient id="_Radial1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(270,0,0,27,603,333)"><stop offset="0" style="stop-color:rgb(255,73,0);stop-opacity:1"/><stop offset="0.97" style="stop-color:rgb(255,86,0);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(255,155,0);stop-opacity:1"/></radialGradient>
+    </defs>
+</svg>

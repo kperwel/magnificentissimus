@@ -2,6 +2,8 @@ import React, { ReactNode } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { Attribute } from "@/model/Person";
 
+import styles from "./styles.module.css";
+
 export function Draggable({
   children,
   attribute,
@@ -23,12 +25,12 @@ export function Draggable({
 
   return (
     <div
+      className={styles.draggable}
       ref={setNodeRef}
       style={style}
-      {...listeners}
-      {...attributes}
     >
       {children}
+      <button className={styles.drag} {...listeners} {...attributes}>DRAG</button>
     </div>
   );
 }

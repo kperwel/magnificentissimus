@@ -20,16 +20,18 @@ export const Unit = ({ person }: { person: Person }) => (
         )}`}
       />
     </Level>
-    <Level>
-      {person.parents?.map((p) => (
-        <Group key={p.id}>
-          {p !== null ? (
-            <Unit person={p} />
-          ) : (
-            <TreeCircle id={-1} name={"unknown"} />
-          )}
-        </Group>
-      ))}
-    </Level>
+    {person.parents ? (
+      <Level>
+        {person.parents?.map((p) => (
+          <Group key={p.id}>
+            {p !== null ? (
+              <Unit person={p} />
+            ) : (
+              <TreeCircle id={-1} name={"unknown"} />
+            )}
+          </Group>
+        ))}
+      </Level>
+    ) : null}
   </div>
 );

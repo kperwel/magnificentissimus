@@ -39,7 +39,8 @@ export default function Home() {
   }
 
   const state = used.reduce(
-    (currentState, setter) => changeAttribute(currentState, setter[0], setter[1]),
+    (currentState, setter) =>
+      changeAttribute(currentState, setter[0], setter[1]),
     tree
   );
   return (
@@ -63,10 +64,8 @@ export default function Home() {
                 Attribute.Bad,
                 Attribute.Fattiness,
               ].map((a) => (
-                  <Draggable attribute={a} key={a}>
-                    <AttributeCard attribute={a} />
-                  </Draggable>
-                ))}
+                <AttributeCard attribute={a} key={a} />
+            ))}
             </div>
 
             <Background className={styles.background} />

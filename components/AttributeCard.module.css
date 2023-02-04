@@ -2,11 +2,8 @@
 
 .card {
   margin: 10px;
-  background: red;
-  border-radius: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 100px;
-  height: 120px;
+  min-width: 150px;
 }

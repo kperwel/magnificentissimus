@@ -18,7 +18,12 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  overscroll-behavior: contain;
+
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+
   z-index: 2;
 }
 
