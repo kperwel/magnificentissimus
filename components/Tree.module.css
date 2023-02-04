@@ -1,0 +1,12 @@
+.tree {
+  overflow: scroll;
+  width: 100vw;
+  scroll-behavior: smooth;
+  flex: 1;
+  padding: 10px;
+}
+
+.inside {
+    width: 1000px;
+    margin: 100px auto;
+}
