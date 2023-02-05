@@ -2,6 +2,11 @@ import "@/styles/globals.css";
 import { Howl } from "howler";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
+import { Dancing_Script } from "@next/font/google";
+
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -12,5 +17,5 @@ export default function App({ Component, pageProps }: AppProps) {
     })
   }, []);
 
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} className={`${dancingScript.className}`} />;
 }

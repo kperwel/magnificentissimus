@@ -12,6 +12,7 @@ function KingTitle({ title }: { title: string }) {
       strokeMiterlimit="1.5"
       clipRule="evenodd"
       viewBox="0 0 605 110"
+      className={styles.title}
     >
       <path
         fill="#C4D7FE"
