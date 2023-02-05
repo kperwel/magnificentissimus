@@ -45,6 +45,7 @@ const titles: Record<Attribute, string> = {
 export interface Person {
   id: number;
   name: string;
+  girl: boolean,
   targetAttributes?: Array<Attribute>;
   attribute?: Attribute;
   parents?: [Person, Person];
@@ -157,12 +158,12 @@ function scoreAttributes(attributes: Array<Attribute>): Scoring {
       .having(Attribute.Strong).cancels(Attribute.Weak)
       .having(Attribute.Weak).cancels(Attribute.Strong)
       .having(Attribute.Short).cancels(Attribute.Tall)
+      
       .having(Attribute.Bad, Attribute.Bad).gives(Attribute.Evil)
       .having(Attribute.Tall, Attribute.Tall).gives(Attribute.Giant)
       .having(Attribute.Corpulent, Attribute.Corpulent).gives(Attribute.Fat)
       .having(Attribute.Strong, Attribute.Fighter).gives(Attribute.Conqueror)
-      .having(Attribute.Evil, Attribute.Fighter).gives(Attribute.Tyrant)
-      .having(Attribute.Bad, Attribute.Fighter).gives(Attribute.Debug);
+      .having(Attribute.Evil, Attribute.Fighter).gives(Attribute.Tyrant);
   }
 
   return scoring;

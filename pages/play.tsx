@@ -2,7 +2,7 @@ import styles from "@/styles/Home.module.css";
 
 import { Dancing_Script } from "@next/font/google";
 import { Unit } from "@/components/Unit";
-import { tree } from "@/model/mock";
+import { tasks } from "@/model/tasks";
 import { Tree } from "@/components/Tree";
 import {
   DndContext,
@@ -26,6 +26,8 @@ export default function Home() {
   const [activeId, setActiveId] = useState<Attribute | null>(null);
   const mainRef = useRef<HTMLElement | null>(null);
 
+  const [task, setTask] = useState(tasks[2]);
+
   const sounds = useMemo(() => {
     return new Howl({
       src: ["shuffling.wav"],
@@ -36,20 +38,6 @@ export default function Home() {
       },
     });
   }, []);
-
-  // useEffect(() => {
-  //   if (mainRef.current) {
-  //     if (!document.fullscreenElement) {
-  //       mainRef.current.requestFullscreen().catch((err) => {
-  //         console.error(
-  //           `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
-  //         );
-  //       });
-  //     } else {
-  //       document.exitFullscreen();
-  //     }
-  //   }
-  // }, []);
 
   function handleDragStart(event: DragStartEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
@@ -70,7 +58,7 @@ export default function Home() {
   const state = used.reduce(
     (currentState, setter) =>
       changeAttribute(currentState, setter[0], setter[1]),
-    tree
+      task.person
   );
   return (
     <>
@@ -87,7 +75,7 @@ export default function Home() {
           </Tree>
           <div className={styles.attributes}>
             <div className={styles.attributeslist}>
-              {[...Object.values(Attribute)].map((a) => (
+              {task.attributes.map((a) => (
                 <AttributeCard attribute={a} key={a} />
               ))}
             </div>

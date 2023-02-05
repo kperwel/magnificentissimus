@@ -8,32 +8,32 @@ const Group = ({ children }: { children: ReactNode }) => (
   <div className={styles.group}>{children}</div>
 );
 
-export const Unit = ({ person, first = false }: { person: Person, first: boolean }) => (
-  <div className={styles.unit}>
-    <Level>
-      <TreeCircle
-        first={first}
-        id={person.id}
-        imNot={createTitle(getAllAttributes(person))}
-        name={`${person.name} ${createTitle(
-          person.targetAttributes
-            ? person.targetAttributes
-            : getAllAttributes(person)
-        )}`}
-      />
-    </Level>
-    {person.parents ? (
+export const Unit = ({ person, first = false }: { person: Person, first: boolean }) => {
+  const currentTitle = createTitle(getAllAttributes(person));
+  const targetTitle = person.targetAttributes ? createTitle(person.targetAttributes) : null;
+  return (
+    <div className={styles.unit}>
       <Level>
-        {person.parents?.map((p) => (
-          <Group key={p.id}>
-            {p !== null ? (
-              <Unit person={p} first={false} />
-            ) : (
-              <TreeCircle first={false} id={-1} name={"unknown"} />
-            )}
-          </Group>
-        ))}
+        <TreeCircle
+          first={first}
+          id={person.id}
+          success={currentTitle === targetTitle}
+          imNot={currentTitle}
+          name={`${person.name} ${targetTitle ? targetTitle : currentTitle}`} />
       </Level>
-    ) : null}
-  </div>
-);
+      {person.parents ? (
+        <Level>
+          {person.parents?.map((p) => (
+            <Group key={p.id}>
+              {p !== null ? (
+                <Unit person={p} first={false} />
+              ) : (
+                <TreeCircle first={false} id={-1} name={"unknown"} />
+              )}
+            </Group>
+          ))}
+        </Level>
+      ) : null}
+    </div>
+  );
+};
