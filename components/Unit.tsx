@@ -16,6 +16,7 @@ export const Unit = ({ person, first = false }: { person: Person, first: boolean
       <Level>
         <TreeCircle
           first={first}
+          queen={person.girl}
           id={person.id}
           success={currentTitle === targetTitle}
           imNot={currentTitle}
@@ -28,7 +29,7 @@ export const Unit = ({ person, first = false }: { person: Person, first: boolean
               {p !== null ? (
                 <Unit person={p} first={false} />
               ) : (
-                <TreeCircle first={false} id={-1} name={"unknown"} />
+                <TreeCircle first={false} id={-1} name={"unknown"} success={false} queen={false} />
               )}
             </Group>
           ))}

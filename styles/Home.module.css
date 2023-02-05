@@ -19,17 +19,30 @@
   margin-top: -50px;
 }
 
-.attributeslist {
-  display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
-  position: relative;
+.wrapper {
+
   overflow-x: scroll;
   overflow-y: hidden;
   overscroll-behavior: contain;
-  z-index: 2;
 }
 
+.attributeslist {
+  z-index: 2;
+  position: relative;
+  display: flex;
+}
+
+.attributes:after {
+  position: absolute;
+  content: "";
+  display: block;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 20px;
+  bottom: 0;
+  background: red;
+}
 
 .background {
   position: absolute;

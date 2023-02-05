@@ -53,14 +53,6 @@ export const person2: Person = {
   parents: [
     {
       ...createRandomBoy(),
-      parents: [
-        {
-          ...createRandomBoy(),
-        },
-        {
-          ...createRandomGirl(),
-        },
-      ],
     },
     {
       ...createRandomGirl(),

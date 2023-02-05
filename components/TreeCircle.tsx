@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Droppable } from "./dnd/Droppable";
 import { King } from "./svg/King";
 import KingTitle from "./svg/KingTitle";
+import Queen from "./svg/Queen";
 import styles from "./TreeCircle.module.css";
 
 export const TreeCircle = ({
@@ -10,12 +11,14 @@ export const TreeCircle = ({
   first,
   imNot,
   success = false,
+  queen = false,
 }: {
   name: string;
   id: number;
   success: boolean;
   first: boolean;
   imNot?: string;
+  queen: boolean;
 }) => {
     const successRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,10 +35,8 @@ export const TreeCircle = ({
           {imNot && first && !success ? (
             <div className={styles.imNot}>
               Hark! I am to be named {'"'}
-              <span>{imNot}?!</span>
-              {'"'}, with the esteemed lineage of my forebears. See to it that all
-              future documents bear this truth, lest there be consequences for thy
-              lack of diligence.
+              <span>{imNot}</span>
+              {'"'}, with the esteemed lineage of my forebears!?
             </div>
           ) : null}
 
@@ -47,7 +48,7 @@ export const TreeCircle = ({
 
           <div className={styles.circle}>
             <div className={styles.photo}>
-              <King />
+              { queen ? <Queen/> : <King /> }
             </div>
           </div>
           <h1 className={styles.title}>{name}</h1>

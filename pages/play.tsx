@@ -58,7 +58,7 @@ export default function Home() {
   const state = used.reduce(
     (currentState, setter) =>
       changeAttribute(currentState, setter[0], setter[1]),
-      task.person
+    task.person
   );
   return (
     <>
@@ -74,13 +74,15 @@ export default function Home() {
             <Unit person={state} first={true} />
           </Tree>
           <div className={styles.attributes}>
-            <div className={styles.attributeslist}>
-              {task.attributes.map((a) => (
-                <AttributeCard attribute={a} key={a} />
-              ))}
-            </div>
+            <div className={styles.wrapper}>
+              <div className={styles.attributeslist}>
+                {task.attributes.map((a) => (
+                  <AttributeCard attribute={a} key={a} />
+                ))}
+              </div>
 
-            <Background className={styles.background} />
+              <Background className={styles.background} />
+            </div>
           </div>
           <DragOverlay>
             {activeId ? <AttributeCard attribute={activeId} /> : null}
