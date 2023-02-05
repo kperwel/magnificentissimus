@@ -9,6 +9,7 @@
 }
 
 .inside {
+    transform: scale(0.8);
     width: 1000px;
     margin: 100px;
 }

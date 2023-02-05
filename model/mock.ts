@@ -1,40 +1,38 @@
+import { names } from "./names";
 import { Attribute, createTitle, getAllAttributes, Person } from "./Person";
+import { getRandom } from "./utils";
+
+let id = 0;
+const createRandom = () => ({
+  id: id++,
+  name: names.at(id) || "",
+});
 
 export const tree: Person = {
-  name: "John",
+  ...createRandom(),
   targetAttributes: [Attribute.Good, Attribute.Beardess, Attribute.Jumpy],
-  id: 0,
   parents: [
     {
-      name: "Jennefer",
-      id: 1,
+      ...createRandom(),
       parents: [
         {
-          name: "Albert",
-          // attribute: Attribute.Good,
-          id: 2,
+          ...createRandom(),
         },
         {
-          name: "Eve",
-          // attribute: Attribute.Good,
+          ...createRandom(),
           parents: [
             {
-              name: "XYZ",
-              id: 6,
+              ...createRandom(),
             },
             {
-              name: "ZBC",
-              id: 7,
-            }
+              ...createRandom(),
+            },
           ],
-          id: 3,
         },
       ],
     },
     {
-      name: "John",
-      id: 4,
-      //   attribute: Attribute.Quickness,
+      ...createRandom(),
     },
   ],
 };

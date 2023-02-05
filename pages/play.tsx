@@ -83,7 +83,7 @@ export default function Home() {
           className={`${styles.main} ${dancingScript.className}`}
         >
           <Tree>
-            <Unit person={state} />
+            <Unit person={state} first={true} />
           </Tree>
           <div className={styles.attributes}>
             <div className={styles.attributeslist}>

@@ -8,11 +8,13 @@ const Group = ({ children }: { children: ReactNode }) => (
   <div className={styles.group}>{children}</div>
 );
 
-export const Unit = ({ person }: { person: Person }) => (
+export const Unit = ({ person, first = false }: { person: Person, first: boolean }) => (
   <div className={styles.unit}>
     <Level>
       <TreeCircle
+        first={first}
         id={person.id}
+        imNot={createTitle(getAllAttributes(person))}
         name={`${person.name} ${createTitle(
           person.targetAttributes
             ? person.targetAttributes
@@ -25,9 +27,9 @@ export const Unit = ({ person }: { person: Person }) => (
         {person.parents?.map((p) => (
           <Group key={p.id}>
             {p !== null ? (
-              <Unit person={p} />
+              <Unit person={p} first={false} />
             ) : (
-              <TreeCircle id={-1} name={"unknown"} />
+              <TreeCircle first={false} id={-1} name={"unknown"} />
             )}
           </Group>
         ))}
