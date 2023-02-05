@@ -119,7 +119,7 @@ export default function Home() {
                   onClick={() => setCurrentTask(currentTask + 1)}
                   className={styles.winModalButton}
                 >
-                  Great Job! Lets see what you can do for friend of mine!
+                  Great Job! Lets see what you can do for a friend of mine!
                   <br />
                   <span>
                     {nextTask?.person.name}{" "}
