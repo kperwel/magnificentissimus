@@ -144,7 +144,6 @@ const createAttributesShop = (queue: Array<Attribute>) => {
 };
 
 function scoreAttributes(attributes: Array<Attribute>): Scoring {
-  console.log(attributes);
   let queue = [...attributes];
   const [scoring, consider] = createAttributesShop(queue);
 
@@ -174,9 +173,5 @@ export function createTitle(attributes: Array<Attribute>): string {
   const scoredTitles = priority
     .filter((a) => score[a] !== 0)
     .map((scoredAttribute) => titles[scoredAttribute]);
-  console.log("START");
-  console.log(attributes, score);
-  console.log(scoredTitles);
-  console.log("END");
   return scoredTitles.length > 0 ? `The ${scoredTitles.join(" ")}` : "";
 }
