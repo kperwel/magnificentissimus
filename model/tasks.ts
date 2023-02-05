@@ -1,5 +1,13 @@
 import { Attribute, Person } from "./Person";
-import { person0, person1, person2, person3, person4 } from "./persons";
+import {
+  person0,
+  person1,
+  person2,
+  person3,
+  person4,
+  conwueror,
+  wizard,
+} from "./persons";
 
 interface Task {
   id: number;
@@ -50,6 +58,22 @@ export const tasks: Array<Task> = [
       Attribute.Bad,
       Attribute.Fighter,
       Attribute.Corpulent,
+      Attribute.Tall,
+    ],
+  },
+  {
+    id: 5,
+    person: conwueror,
+    attributes: [Attribute.Good, Attribute.Bad, Attribute.Tall, Attribute.Strong, Attribute.Beardy, Attribute.Fighter],
+  },
+  {
+    id: 6,
+    person: wizard,
+    attributes: [
+      Attribute.Good,
+      Attribute.Wisdom,
+      Attribute.Strong,
+      Attribute.Beardy,
       Attribute.Tall,
     ],
   },

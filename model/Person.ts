@@ -4,7 +4,7 @@ export enum Attribute {
   Fat = "Fat",
   Corpulent = "Corpulent",
   Weak = "Weak",
-  Beardess = "Beardess",
+  Beardy = "Beardy",
   Short = "Shortness",
   Quick = "Quick",
   Wisdom = "Wisdom",
@@ -17,6 +17,8 @@ export enum Attribute {
   Conqueror = "Conqueror",
   Tyrant = "Tyrant",
   Debug = "Debug",
+  Slim = "Slim",
+  Magician = "Magician"
 }
 
 const priority = [...Object.values(Attribute)].reverse();
@@ -27,18 +29,20 @@ const titles: Record<Attribute, string> = {
   [Attribute.Tall]: "High",
   [Attribute.Fat]: "Fat",
   [Attribute.Corpulent]: "Corpulent",
-  [Attribute.Beardess]: "Beardy",
+  [Attribute.Beardy]: "Beardy",
   [Attribute.Short]: "Small",
   [Attribute.Quick]: "Quick",
   [Attribute.Wisdom]: "Smart",
   [Attribute.Jumpy]: "Flyer",
-  [Attribute.Fighter]: "Fighting",
+  [Attribute.Fighter]: "Fighter",
   [Attribute.Good]: "Good",
   [Attribute.Bad]: "Bad",
   [Attribute.Evil]: "Evil",
   [Attribute.Conqueror]: "Conqueror",
   [Attribute.Giant]: "Gigantic",
   [Attribute.Tyrant]: "Tyrant",
+  [Attribute.Slim]: "Slim",
+  [Attribute.Magician]: "Magician",
   [Attribute.Debug]: "###",
 };
 
@@ -90,7 +94,7 @@ const createAttributesShop = (queue: Array<Attribute>) => {
     [Attribute.Strong]: 0,
     [Attribute.Tall]: 0,
     [Attribute.Fat]: 0,
-    [Attribute.Beardess]: 0,
+    [Attribute.Beardy]: 0,
     [Attribute.Short]: 0,
     [Attribute.Quick]: 0,
     [Attribute.Wisdom]: 0,
@@ -104,7 +108,9 @@ const createAttributesShop = (queue: Array<Attribute>) => {
     [Attribute.Weak]: 0,
     [Attribute.Debug]: 0,
     [Attribute.Conqueror]: 0,
-    [Attribute.Tyrant]: 0
+    [Attribute.Tyrant]: 0,
+    [Attribute.Slim]: 0,
+    [Attribute.Magician]: 0
   };
   return [
     scoring,
@@ -158,11 +164,12 @@ function scoreAttributes(attributes: Array<Attribute>): Scoring {
       .having(Attribute.Strong).cancels(Attribute.Weak)
       .having(Attribute.Weak).cancels(Attribute.Strong)
       .having(Attribute.Short).cancels(Attribute.Tall)
-      
+
       .having(Attribute.Bad, Attribute.Bad).gives(Attribute.Evil)
       .having(Attribute.Tall, Attribute.Tall).gives(Attribute.Giant)
       .having(Attribute.Corpulent, Attribute.Corpulent).gives(Attribute.Fat)
       .having(Attribute.Strong, Attribute.Fighter).gives(Attribute.Conqueror)
+      .having(Attribute.Wisdom, Attribute.Tall, Attribute.Beardy).gives(Attribute.Magician)
       .having(Attribute.Evil, Attribute.Fighter).gives(Attribute.Tyrant);
   }
 

@@ -15,8 +15,6 @@ const createRandomGirl = () => ({
   name: girlNames.at(id) || "",
 });
 
-
-
 // Evil
 export const person0: Person = {
   ...createRandomBoy(),
@@ -45,7 +43,6 @@ export const person1: Person = {
   ],
 };
 
-
 // Giant
 export const person2: Person = {
   ...createRandomBoy(),
@@ -60,12 +57,15 @@ export const person2: Person = {
   ],
 };
 
-
-
 // Evil Giant
 export const person3: Person = {
   ...createRandomBoy(),
-  targetAttributes: [Attribute.Tall, Attribute.Tall, Attribute.Bad, Attribute.Bad],
+  targetAttributes: [
+    Attribute.Tall,
+    Attribute.Tall,
+    Attribute.Bad,
+    Attribute.Bad,
+  ],
   parents: [
     {
       ...createRandomBoy(),
@@ -91,7 +91,6 @@ export const person3: Person = {
     },
   ],
 };
-
 
 // Tyrant
 export const person4: Person = {
@@ -111,6 +110,46 @@ export const person4: Person = {
     },
     {
       ...createRandomGirl(),
+    },
+  ],
+};
+
+// Conqueror
+export const conwueror: Person = {
+  ...createRandomGirl(),
+  targetAttributes: [Attribute.Strong, Attribute.Fighter],
+  parents: [
+    {
+      ...createRandomBoy(),
+    },
+    {
+      ...createRandomGirl(),
+    },
+  ],
+};
+
+// Wizard
+export const wizard: Person = {
+  ...createRandomBoy(),
+  targetAttributes: [
+    Attribute.Wisdom,
+    Attribute.Beardy,
+    Attribute.Tall,
+  ],
+  parents: [
+    {
+      ...createRandomBoy(),
+    },
+    {
+      ...createRandomGirl(),
+      parents: [
+        {
+          ...createRandomGirl(),
+        },
+        {
+          ...createRandomGirl(),
+        },
+      ],
     },
   ],
 };
