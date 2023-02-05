@@ -12,7 +12,7 @@ import {
   DragStartEvent,
 } from "@dnd-kit/core";
 import { AttributeCard } from "@/components/AttributeCard";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Attribute, attributes, Person } from "@/model/Person";
 import Background from "@/components/svg/Background";
 import { Howl } from "howler";
@@ -24,6 +24,7 @@ const dancingScript = Dancing_Script({
 export default function Home() {
   const [used, setUsed] = useState<Array<[number, Attribute]>>([]);
   const [activeId, setActiveId] = useState<Attribute | null>(null);
+  const mainRef = useRef<HTMLElement | null>(null);
 
   const sounds = useMemo(() => {
     return new Howl({
@@ -36,9 +37,23 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    if (mainRef.current) {
+      if (!document.fullscreenElement) {
+        mainRef.current.requestFullscreen().catch((err) => {
+          console.error(
+            `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
+          );
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  }, []);
+
   function handleDragStart(event: DragStartEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
-    sounds.play('shuffle')
+    sounds.play("shuffle");
     setActiveId(attribute);
   }
 
@@ -46,7 +61,7 @@ export default function Home() {
     const attribute: Attribute = event.active.data.current!.attribute;
     if (event.over && event.over.data.current) {
       const personId = event.over.data.current.id as number;
-      sounds.play('shuffle2')
+      sounds.play("shuffle2");
       setUsed([...used, [personId, attribute]]);
     }
     setActiveId(null);
@@ -72,15 +87,16 @@ export default function Home() {
       </Head>
 
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <main className={`${styles.main} ${dancingScript.className}`}>
+        <main
+          ref={mainRef}
+          className={`${styles.main} ${dancingScript.className}`}
+        >
           <Tree>
             <Unit person={state} />
           </Tree>
           <div className={styles.attributes}>
             <div className={styles.attributeslist}>
-              {[
-                ...Object.values(Attribute),
-              ].map((a) => (
+              {[...Object.values(Attribute)].map((a) => (
                 <AttributeCard attribute={a} key={a} />
               ))}
             </div>
