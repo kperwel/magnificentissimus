@@ -24,7 +24,7 @@ export default function Home() {
           a writer and recorder of history are greatly valued, and we look
           forward to your contributions to our chronicles.
         </p>
-        <p>Your majesty is asking you to fullfill his family tree!</p>
+        <p>Your majesty is asking you to fulfill his family tree!</p>
 
         <Link className={style.startButton} href="/play">
           START
