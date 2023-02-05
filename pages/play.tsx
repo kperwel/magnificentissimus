@@ -11,7 +11,7 @@ import {
   DragStartEvent,
 } from "@dnd-kit/core";
 import { AttributeCard } from "@/components/AttributeCard";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Attribute,
   createTitle,
@@ -58,6 +58,13 @@ export default function Home() {
     });
   }, []);
 
+  const win = useMemo(() => {
+    return new Howl({
+      src: ["win.ogg"],
+      volume: 1,
+    });
+  }, []);
+
   function handleDragStart(event: DragStartEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
     sounds.play("shuffle");
@@ -73,6 +80,14 @@ export default function Home() {
     }
     setActiveId(null);
   }
+
+  useEffect(() => {
+    if (success) {
+      win.play();
+    } else {
+      win.stop();
+    }
+  }, [success, win])
 
   return (
     <>
