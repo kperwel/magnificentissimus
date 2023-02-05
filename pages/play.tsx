@@ -12,10 +12,16 @@ import {
 } from "@dnd-kit/core";
 import { AttributeCard } from "@/components/AttributeCard";
 import { useMemo, useRef, useState } from "react";
-import { Attribute, Person } from "@/model/Person";
+import {
+  Attribute,
+  createTitle,
+  getAllAttributes,
+  Person,
+} from "@/model/Person";
 import Background from "@/components/svg/Background";
 import { Howl } from "howler";
 import Head from "next/head";
+import Link from "next/link";
 
 const dancingScript = Dancing_Script({
   subsets: ["latin"],
@@ -26,7 +32,20 @@ export default function Home() {
   const [activeId, setActiveId] = useState<Attribute | null>(null);
   const mainRef = useRef<HTMLElement | null>(null);
 
-  const [task, setTask] = useState(tasks[2]);
+  const [currentTask, setCurrentTask] = useState(0);
+  const task = tasks.at(currentTask)!;
+  const nextTask = tasks.at(currentTask + 1);
+  const state = used.reduce(
+    (currentState, setter) =>
+      changeAttribute(currentState, setter[0], setter[1]),
+    task.person
+  );
+
+  const success = useMemo(() => {
+    const currentTitle = createTitle(getAllAttributes(state));
+    const targetTitle = createTitle(task.person.targetAttributes!);
+    return currentTitle === targetTitle;
+  }, [state, task.person.targetAttributes]);
 
   const sounds = useMemo(() => {
     return new Howl({
@@ -55,11 +74,6 @@ export default function Home() {
     setActiveId(null);
   }
 
-  const state = used.reduce(
-    (currentState, setter) =>
-      changeAttribute(currentState, setter[0], setter[1]),
-    task.person
-  );
   return (
     <>
       <Head>
@@ -83,6 +97,29 @@ export default function Home() {
 
               <Background className={styles.background} />
             </div>
+
+            {success && currentTask < tasks.length - 1 ? (
+              <div className={`${styles.winModal} ${dancingScript.className}`}>
+                <button
+                  onClick={() => setCurrentTask(currentTask + 1)}
+                  className={styles.winModalButton}
+                >
+                  Great Job! Lets see what you can do for friend of mine!
+                  <br />
+                  <span>
+                    {nextTask?.person.name}{" "}
+                    {createTitle(nextTask?.person.targetAttributes ?? [])} »
+                  </span>
+                </button>
+              </div>
+            ) : success && currentTask === tasks.length - 1 ? (
+              <div className={`${styles.winModal} ${dancingScript.className}`}>
+                <Link href="/" className={styles.winModalButton}>
+                  Great Job! Thank you my scribe! Thats all for today. Time to
+                  rest... <br /> or <span>Play Again</span>
+                </Link>
+              </div>
+            ) : null}
           </div>
           <DragOverlay>
             {activeId ? <AttributeCard attribute={activeId} /> : null}
