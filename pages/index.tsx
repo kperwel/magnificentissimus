@@ -12,10 +12,10 @@ import {
   DragStartEvent,
 } from "@dnd-kit/core";
 import { AttributeCard } from "@/components/AttributeCard";
-import { useState } from "react";
-import { Draggable } from "@/components/dnd/Draggable";
-import { Attribute, getAllAttributes, Person } from "@/model/Person";
+import { useMemo, useState } from "react";
+import { Attribute, attributes, Person } from "@/model/Person";
 import Background from "@/components/svg/Background";
+import { Howl } from "howler";
 
 const dancingScript = Dancing_Script({
   subsets: ["latin"],
@@ -24,8 +24,21 @@ const dancingScript = Dancing_Script({
 export default function Home() {
   const [used, setUsed] = useState<Array<[number, Attribute]>>([]);
   const [activeId, setActiveId] = useState<Attribute | null>(null);
+
+  const sounds = useMemo(() => {
+    return new Howl({
+      src: ["shuffling.wav"],
+      volume: 0.5,
+      sprite: {
+        shuffle: [1600, 1000],
+        shuffle2: [6400, 6300],
+      },
+    });
+  }, []);
+
   function handleDragStart(event: DragStartEvent) {
     const attribute: Attribute = event.active.data.current!.attribute;
+    sounds.play('shuffle')
     setActiveId(attribute);
   }
 
@@ -33,10 +46,15 @@ export default function Home() {
     const attribute: Attribute = event.active.data.current!.attribute;
     if (event.over && event.over.data.current) {
       const personId = event.over.data.current.id as number;
+      sounds.play('shuffle2')
       setUsed([...used, [personId, attribute]]);
     }
     setActiveId(null);
   }
+
+  // function onPersonClick = (personId: number) => {
+
+  // }
 
   const state = used.reduce(
     (currentState, setter) =>
@@ -60,12 +78,10 @@ export default function Home() {
           <div className={styles.attributes}>
             <div className={styles.attributeslist}>
               {[
-                ...(state.targetAttributes ?? []),
-                Attribute.Bad,
-                Attribute.Fattiness,
+                ...Object.values(Attribute),
               ].map((a) => (
                 <AttributeCard attribute={a} key={a} />
-            ))}
+              ))}
             </div>
 
             <Background className={styles.background} />

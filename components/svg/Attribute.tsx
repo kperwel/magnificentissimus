@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles.module.css";
 
 function Attribute({ name }: { name: string }) {
   return (
@@ -21,14 +22,24 @@ function Attribute({ name }: { name: string }) {
         d="M285.389 1587.72c-40.954-5-81.317-13.93-120.296-32.08-40.473 16.92-80.482 26.13-120.297 32.08v240.59h240.593v-240.59z"
         transform="translate(-390.729 -1240.39) translate(0 -666.499) matrix(.8529 0 0 -1.25426 404.594 4210.17)"
       ></path>
+      <path
+        fill="#620C00"
+        stroke="url(#_Radial1)"
+        strokeWidth="7.78"
+        d="M873 319.5c0-7.451-20.042-13.5-44.729-13.5H377.729C353.042 306 333 312.049 333 319.5v27c0 7.451 20.042 13.5 44.729 13.5h450.542c24.687 0 44.729-6.049 44.729-13.5v-27z"
+        transform="translate(-390.729 -1240.39) translate(0 -666.499) matrix(.55333 0 0 1.83333 211.74 1524.12)"
+      ></path>
       <g>
-        <path
-          fill="#620C00"
-          stroke="url(#_Radial1)"
-          strokeWidth="7.78"
-          d="M873 319.5c0-7.451-20.042-13.5-44.729-13.5H377.729C353.042 306 333 312.049 333 319.5v27c0 7.451 20.042 13.5 44.729 13.5h450.542c24.687 0 44.729-6.049 44.729-13.5v-27z"
-          transform="translate(-390.729 -1240.39) translate(0 -666.499) matrix(.55333 0 0 1.83333 211.74 1524.12)"
-        ></path>
+        <text
+          className={styles.attributeText}
+          textAnchor="middle"
+          x="540.08"
+          y="1481.81"
+          fontSize="36"
+          transform="translate(-390.729 -1240.39) translate(0 -666.499) translate(-.624 666.499)"
+        >
+          {name}
+        </text>
       </g>
       <defs>
         <radialGradient

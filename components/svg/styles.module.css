@@ -1,0 +1,12 @@
+.text {
+    font-size: 80px;
+    text-anchor: middle;
+    text-align: center;
+}
+
+.attributeText {
+    font-size: 60px;
+    fill: #fff;
+    text-anchor: middle;
+    text-align: center;
+}

@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: hidden;
 }
 
 .attributes {
@@ -15,15 +16,12 @@
 
 .attributeslist {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   position: relative;
   overflow-x: scroll;
+  overflow-y: hidden;
   overscroll-behavior: contain;
-
-  scrollbar-color: rebeccapurple green;
-  scrollbar-width: thin;
-
   z-index: 2;
 }
 

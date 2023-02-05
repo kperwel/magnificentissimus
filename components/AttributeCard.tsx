@@ -7,7 +7,6 @@ export function AttributeCard({ attribute }: { attribute: Attribute }) {
     <Draggable attribute={attribute}>
       <article className={styles.card}>
         <AttributeSVG name={attribute} />
-        {/* <h1>{attribute}</h1> */}
       </article>
     </Draggable>
   );

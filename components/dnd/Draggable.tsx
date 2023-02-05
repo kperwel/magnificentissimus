@@ -11,7 +11,7 @@ export function Draggable({
   children: ReactNode;
   attribute: Attribute;
 }) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+  const { attributes, listeners, setNodeRef, transform, active } = useDraggable({
     id: attribute,
     data: {
       attribute,
@@ -19,7 +19,7 @@ export function Draggable({
   });
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        opacity: active ? 0 : 1
       }
     : undefined;
 

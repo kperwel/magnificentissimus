@@ -17,6 +17,16 @@ export const tree: Person = {
         {
           name: "Eve",
           // attribute: Attribute.Good,
+          parents: [
+            {
+              name: "XYZ",
+              id: 6,
+            },
+            {
+              name: "ZBC",
+              id: 7,
+            }
+          ],
           id: 3,
         },
       ],
