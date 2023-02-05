@@ -10,11 +10,13 @@ export const TreeCircle = ({
   id,
   first,
   imNot,
+  last = false,
   success = false,
   queen = false,
 }: {
   name: string;
   id: number;
+  last: boolean,
   success: boolean;
   first: boolean;
   imNot?: string;
@@ -30,7 +32,7 @@ export const TreeCircle = ({
     }, [successRef])
 
     return (
-      <Droppable id={id}>
+      <Droppable id={id} disable={last}>
         <article className={`${styles.leaf} ${first ? styles.first : ""}`}>
           {imNot && first && !success ? (
             <div className={styles.imNot}>
