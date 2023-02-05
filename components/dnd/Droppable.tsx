@@ -1,5 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { ReactNode } from "react";
+import styles from "./styles.module.css";
 
 export function Droppable({ children, id }: { children: ReactNode, id: number }) {
     const {isOver, setNodeRef} = useDroppable({
@@ -9,12 +10,11 @@ export function Droppable({ children, id }: { children: ReactNode, id: number })
       }
     });
     const style = {
-      outline: isOver ? '2px solid green' : undefined,
+      transform: `scale(${isOver ? '1.05' : 1}) translate(0, ${isOver ? '5px' : 0})`,
     };
     
-    
     return (
-      <div ref={setNodeRef} style={style}>
+      <div className={styles.droppable} ref={setNodeRef} style={style}>
         {children}
       </div>
     );
