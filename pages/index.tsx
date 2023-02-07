@@ -1,5 +1,8 @@
 import { AttributeCard } from "@/components/AttributeCard";
+import { Tree } from "@/components/Tree";
+import { Unit } from "@/components/Unit";
 import { Attribute } from "@/model/Person";
+import { wizard } from "@/model/persons";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import Head from "next/head";
 
@@ -17,7 +20,9 @@ export default function Home() {
       </Head>
       <DndContext>
         <main className={styles.main}>
-          <div className={styles.viewport}></div>
+          <div className={styles.viewport}>
+            <Unit first person={wizard} />
+          </div>
           <div className={styles.drawer}>
             <ul className={styles.attributesList}>
               <li>
