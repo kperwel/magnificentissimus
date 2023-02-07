@@ -85,4 +85,8 @@
   .attributeslist {
     justify-content: center;
   }
+
+  .wrapper:after {
+    display: none;
+  }
 }

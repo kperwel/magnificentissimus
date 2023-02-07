@@ -6,6 +6,7 @@ export enum Attribute {
   Weak = "Weak",
   Beardy = "Beardy",
   Short = "Shortness",
+  Sage = "Sage",
   Quick = "Quick",
   Wisdom = "Wisdom",
   Jumpy = "Jumpy",
@@ -43,6 +44,7 @@ const titles: Record<Attribute, string> = {
   [Attribute.Tyrant]: "Tyrant",
   [Attribute.Slim]: "Slim",
   [Attribute.Magician]: "Magician",
+  [Attribute.Sage]: "Sage",
   [Attribute.Debug]: "###",
 };
 
@@ -110,7 +112,8 @@ const createAttributesShop = (queue: Array<Attribute>) => {
     [Attribute.Conqueror]: 0,
     [Attribute.Tyrant]: 0,
     [Attribute.Slim]: 0,
-    [Attribute.Magician]: 0
+    [Attribute.Magician]: 0,
+    [Attribute.Sage]: 0
   };
   return [
     scoring,
@@ -169,7 +172,8 @@ function scoreAttributes(attributes: Array<Attribute>): Scoring {
       .having(Attribute.Tall, Attribute.Tall).gives(Attribute.Giant)
       .having(Attribute.Corpulent, Attribute.Corpulent).gives(Attribute.Fat)
       .having(Attribute.Strong, Attribute.Fighter).gives(Attribute.Conqueror)
-      .having(Attribute.Wisdom, Attribute.Tall, Attribute.Beardy).gives(Attribute.Magician)
+      .having(Attribute.Wisdom, Attribute.Beardy).gives(Attribute.Sage)
+      .having(Attribute.Sage, Attribute.Beardy).gives(Attribute.Magician)
       .having(Attribute.Evil, Attribute.Fighter).gives(Attribute.Tyrant);
   }
 

@@ -1,0 +1,15 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.viewport {
+    flex: 1;
+}
+.attributesList {
+    flex: 1;
+    display: flex;
+    max-width: 100%;
+    overflow: scroll;
+}

@@ -1,12 +1,9 @@
-import { Dancing_Script } from "@next/font/google";
+import { AttributeCard } from "@/components/AttributeCard";
+import { Attribute } from "@/model/Person";
+import { DndContext, DragOverlay } from "@dnd-kit/core";
 import Head from "next/head";
-import Link from "next/link";
 
-import style from "../styles/Index.module.css";
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-});
+import styles from "../styles/Game.module.css";
 
 export default function Home() {
   return (
@@ -18,18 +15,43 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
-      <main className={`${dancingScript.className} ${style.main}`}>
-        <p>
-          Greetings, Scribe! You are most welcome to our kingdom. Your skills as
-          a writer and recorder of history are greatly valued, and we look
-          forward to your contributions to our chronicles.
-        </p>
-        <p>Your majesty is asking you to fulfill his family tree!</p>
+      <DndContext>
+        <main className={styles.main}>
+          <div className={styles.viewport}></div>
+          <div className={styles.drawer}>
+            <ul className={styles.attributesList}>
+              <li>
+                <AttributeCard attribute={Attribute.Bad} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Good} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Conqueror} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Beardy} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Debug} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Fat} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Evil} />
+              </li>
+              <li>
+                <AttributeCard attribute={Attribute.Jumpy} />
+              </li>
+            </ul>
+          </div>
+        </main>
 
-        <Link className={style.startButton} href="/play">
-          START
-        </Link>
-      </main>
+        <DragOverlay>
+          <AttributeCard attribute={Attribute.Bad} />
+        </DragOverlay>
+      </DndContext>
     </>
   );
 }
