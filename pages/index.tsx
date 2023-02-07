@@ -21,7 +21,9 @@ export default function Home() {
       <DndContext>
         <main className={styles.main}>
           <div className={styles.viewport}>
-            <Unit first person={wizard} />
+            <div className={styles.viewportInside}>
+              <Unit first person={wizard} />
+            </div>
           </div>
           <div className={styles.drawer}>
             <ul className={styles.attributesList}>
