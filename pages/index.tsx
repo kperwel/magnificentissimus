@@ -1,12 +1,12 @@
 import { AttributeCard } from "@/components/AttributeCard";
 import { Tree } from "@/components/Tree";
 import { Fork } from "@/components/Fork";
-import { Tag } from "@/model/Person";
-import { example } from "@/model/persons";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import Head from "next/head";
 
 import styles from "../styles/Game.module.css";
+import { example } from "@/model/data";
+import { Tag } from "@/model/Tag";
 
 export default function Home() {
   return (
