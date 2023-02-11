@@ -1,11 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Droppable } from "./dnd/Droppable";
 import { King } from "./svg/King";
-import KingTitle from "./svg/KingTitle";
 import Queen from "./svg/Queen";
-import styles from "./TreeCircle.module.css";
+import styles from "./Leaf.module.css";
 
-export const TreeCircle = ({
+export const Leaf = ({
   name,
   id,
   first,
@@ -54,7 +53,6 @@ export const TreeCircle = ({
             </div>
           </div>
           <h1 className={styles.title}>{name}</h1>
-          {/* <KingTitle title={name} /> */}
         </article>
       </Droppable>
     );

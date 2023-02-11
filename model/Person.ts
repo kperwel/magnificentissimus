@@ -1,8 +1,10 @@
-export enum Attribute {
+import { male } from "./names";
+
+export enum Tag {
   Strong = "Strong",
   Tall = "Tall",
   Fat = "Fat",
-  Corpulent = "Plump",
+  Plump = "Plump",
   Weak = "Weak",
   Beardy = "Beardy",
   Short = "Shortness",
@@ -14,176 +16,85 @@ export enum Attribute {
   Good = "Good",
   Bad = "Bad",
   Evil = "Evil",
-  Giant = "Gigantic",
+  Giant = "Giant",
   Conqueror = "Conqueror",
   Tyrant = "Tyrant",
-  Debug = "Debug",
   Slim = "Slim",
-  Magician = "Magician"
+  Magician = "Magician",
 }
 
-const priority = [...Object.values(Attribute)].reverse();
+const createKey = <T extends string>(keys: Array<T>) => keys.sort().join("+");
+const createMapper = <T extends string>(
+  ...mappings: Array<[Array<T>, T]>
+) => {
+  const map: Record<string, T> = {};
 
-const titles: Record<Attribute, string> = {
-  [Attribute.Strong]: "Strong",
-  [Attribute.Weak]: "Weak",
-  [Attribute.Tall]: "Tall",
-  [Attribute.Fat]: "Fat",
-  [Attribute.Corpulent]: "Plump",
-  [Attribute.Beardy]: "Beardy",
-  [Attribute.Short]: "Small",
-  [Attribute.Quick]: "Quick",
-  [Attribute.Wisdom]: "Smart",
-  [Attribute.Jumpy]: "Flyer",
-  [Attribute.Fighter]: "Fighter",
-  [Attribute.Good]: "Good",
-  [Attribute.Bad]: "Bad",
-  [Attribute.Evil]: "Evil",
-  [Attribute.Conqueror]: "Conqueror",
-  [Attribute.Giant]: "Gigantic",
-  [Attribute.Tyrant]: "Tyrant",
-  [Attribute.Slim]: "Slim",
-  [Attribute.Magician]: "Magician",
-  [Attribute.Sage]: "Sage",
-  [Attribute.Debug]: "###",
-};
-
-export interface Person {
-  id: number;
-  name: string;
-  girl: boolean,
-  targetAttributes?: Array<Attribute>;
-  attribute?: Attribute;
-  parents?: [Person, Person];
-}
-
-export const attributes = Object.entries(Attribute);
-
-export function getAllAttributes(person: Person): Array<Attribute> {
-  let attributes: Array<Attribute> = [];
-
-  if (person.attribute) {
-    attributes.push(person.attribute);
-  }
-
-  if (!person.parents) {
-    return attributes;
-  }
-
-  if (person.parents[0] !== null) {
-    attributes.push(...getAllAttributes(person.parents[0]));
-  }
-
-  if (person.parents[1] !== null) {
-    attributes.push(...getAllAttributes(person.parents[1]));
-  }
-
-  return attributes;
-}
-
-type Scoring = Record<Attribute, number>;
-
-const count = (attribute: Attribute, price: Array<Attribute>) => price.filter(p => p === attribute).length;
-const enough = (scoring: Scoring, price: Array<Attribute>): boolean => {
-  return price.every((atribute, _index, inPrice) => {
-    const occurences = count(atribute, inPrice);
-    return scoring[atribute] >= occurences;
-  });
-}
-
-const createAttributesShop = (queue: Array<Attribute>) => {
-  const scoring: Scoring = {
-    [Attribute.Strong]: 0,
-    [Attribute.Tall]: 0,
-    [Attribute.Fat]: 0,
-    [Attribute.Beardy]: 0,
-    [Attribute.Short]: 0,
-    [Attribute.Quick]: 0,
-    [Attribute.Wisdom]: 0,
-    [Attribute.Jumpy]: 0,
-    [Attribute.Fighter]: 0,
-    [Attribute.Good]: 0,
-    [Attribute.Bad]: 0,
-    [Attribute.Evil]: 0,
-    [Attribute.Giant]: 0,
-    [Attribute.Corpulent]: 0,
-    [Attribute.Weak]: 0,
-    [Attribute.Debug]: 0,
-    [Attribute.Conqueror]: 0,
-    [Attribute.Tyrant]: 0,
-    [Attribute.Slim]: 0,
-    [Attribute.Magician]: 0,
-    [Attribute.Sage]: 0
+  const set = (...mapping: [Array<T>, T]) => {
+    map[createKey(mapping[0])] = mapping[1];
   };
-  return [
-    scoring,
-    (attribute: Attribute) => {
-      scoring[attribute]++;
 
-      const having = (...what: Array<Attribute>) => {
-        if (!enough(scoring, what)) {
-          return {
-            gives: (_give: Attribute) => ({ having }),
-            cancels: (_cancel: Attribute) => ({ having }),
-          };
-        }
+  const get = (keys: Array<T>) => map[createKey(keys)];
 
-        return {
-          gives: (give: Attribute) => {
-            for (let attr of what) {
-              scoring[attr] -= 1;
-            }
-            queue.push(give);
-            return { having };
-          },
-          cancels: (cancel: Attribute) => {
-            if (scoring[cancel] > 0) {
-              for (let attr of what) {
-                scoring[attr] -= 1;
-              }
-              scoring[cancel] -= 1;
-            }
-            return { having };
-          },
-        };
-      };
+  mappings.forEach((mapping) => set(...mapping));
 
-      return { having };
-    },
-  ] as const;
+  return {
+    get,
+    set,
+  };
 };
 
-function scoreAttributes(attributes: Array<Attribute>): Scoring {
-  let queue = [...attributes];
-  const [scoring, consider] = createAttributesShop(queue);
+const mapper = createMapper<Tag>(
+  [[Tag.Bad, Tag.Bad], Tag.Evil],
+  [[Tag.Tall, Tag.Tall], Tag.Giant],
+  [[Tag.Beardy, Tag.Wisdom], Tag.Sage],
+  [[Tag.Sage, Tag.Wisdom], Tag.Magician]
+);
 
-  let attribute: Attribute | undefined;
-  while ((attribute = queue.shift())) {
-    // prettier-ignore
-    consider(attribute)
-      .having(Attribute.Bad).cancels(Attribute.Good)
-      .having(Attribute.Good).cancels(Attribute.Bad)
-      .having(Attribute.Tall).cancels(Attribute.Short)
-      .having(Attribute.Strong).cancels(Attribute.Weak)
-      .having(Attribute.Weak).cancels(Attribute.Strong)
-      .having(Attribute.Short).cancels(Attribute.Tall)
+const combineAttributes = (attributes: Array<Tag>): Tag => {
+  if (attributes.length === 1) {
+    return attributes[0];
+  }
+  return mapper.get(attributes);
+};
 
-      .having(Attribute.Bad, Attribute.Bad).gives(Attribute.Evil)
-      .having(Attribute.Tall, Attribute.Tall).gives(Attribute.Giant)
-      .having(Attribute.Corpulent, Attribute.Corpulent).gives(Attribute.Fat)
-      .having(Attribute.Strong, Attribute.Fighter).gives(Attribute.Conqueror)
-      .having(Attribute.Wisdom, Attribute.Beardy).gives(Attribute.Sage)
-      .having(Attribute.Sage, Attribute.Beardy).gives(Attribute.Magician)
-      .having(Attribute.Evil, Attribute.Fighter).gives(Attribute.Tyrant);
+export class Person {
+  private static id = 0;
+  private static getId() {
+    return Person.id++;
+  }
+  private static getName() {
+    return male[Person.id];
   }
 
-  return scoring;
+  public readonly id: number = Person.getId();
+  public readonly name: string = Person.getName();
+
+  public readonly parents: Array<Person> = [];
+
+  public assigned: Tag | null = null;
+  public get inherited(): Tag {
+    const parentAttributes = this.parents.flatMap((p) => p.all);
+    return combineAttributes(parentAttributes);
+  }
+  public get all() {
+    const all = [];
+    console.log(this.assigned, this.inherited);
+
+    if (this.assigned) {
+      all.push(this.assigned);
+    }
+
+    if (this.inherited) {
+      all.push(this.inherited);
+    }
+
+    return combineAttributes(all);
+  }
+
+  constructor(tag: Tag | null = null, parents: Array<Person> = []) {
+    this.parents = parents;
+    this.assigned = tag;
+  }
 }
 
-export function createTitle(attributes: Array<Attribute>): string {
-  const score = scoreAttributes(attributes);
-  const scoredTitles = priority
-    .filter((a) => score[a] !== 0)
-    .map((scoredAttribute) => titles[scoredAttribute]);
-  return scoredTitles.length > 0 ? `The ${scoredTitles.join(" ")}` : "";
-}
+export const createTitle = (tags: Array<Tag>) => tags.join(" ");

@@ -1,4 +1,4 @@
-export const boyNames = [
+export const male = [
   "Alaric",
   "Aldous",
   "Archibald",
@@ -90,7 +90,7 @@ export const boyNames = [
   "Thomasina",
   "Ursula",
 ];
-export const girlNames = [
+export const female = [
   "Anika",
   "Bogdana",
   "Celestina",

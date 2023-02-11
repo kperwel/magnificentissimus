@@ -1,4 +1,4 @@
-import { Attribute, Person } from "./Person";
+import { Tag, Person } from "./Person";
 import {
   person0,
   person1,
@@ -12,69 +12,69 @@ import {
 interface Task {
   id: number;
   person: Person;
-  attributes: Array<Attribute>;
+  attributes: Array<Tag>;
 }
 
 export const tasks: Array<Task> = [
   {
     id: 0,
     person: person0,
-    attributes: [Attribute.Bad, Attribute.Good],
+    attributes: [Tag.Bad, Tag.Good],
   },
   {
     id: 1,
     person: person1,
     attributes: [
-      Attribute.Bad,
-      Attribute.Fighter,
-      Attribute.Corpulent,
-      Attribute.Tall,
+      Tag.Bad,
+      Tag.Fighter,
+      Tag.Plump,
+      Tag.Tall,
     ],
   },
   {
     id: 2,
     person: person2,
     attributes: [
-      Attribute.Bad,
-      Attribute.Fighter,
-      Attribute.Corpulent,
-      Attribute.Tall,
+      Tag.Bad,
+      Tag.Fighter,
+      Tag.Plump,
+      Tag.Tall,
     ],
   },
   {
     id: 3,
     person: person3,
     attributes: [
-      Attribute.Bad,
-      Attribute.Fighter,
-      Attribute.Corpulent,
-      Attribute.Tall,
+      Tag.Bad,
+      Tag.Fighter,
+      Tag.Plump,
+      Tag.Tall,
     ],
   },
   {
     id: 4,
     person: person4,
     attributes: [
-      Attribute.Bad,
-      Attribute.Fighter,
-      Attribute.Corpulent,
-      Attribute.Tall,
+      Tag.Bad,
+      Tag.Fighter,
+      Tag.Plump,
+      Tag.Tall,
     ],
   },
   {
     id: 5,
     person: conwueror,
-    attributes: [Attribute.Good, Attribute.Bad, Attribute.Tall, Attribute.Strong, Attribute.Beardy, Attribute.Fighter],
+    attributes: [Tag.Good, Tag.Bad, Tag.Tall, Tag.Strong, Tag.Beardy, Tag.Fighter],
   },
   {
     id: 6,
     person: wizard,
     attributes: [
-      Attribute.Good,
-      Attribute.Wisdom,
-      Attribute.Strong,
-      Attribute.Beardy,
-      Attribute.Tall,
+      Tag.Good,
+      Tag.Wisdom,
+      Tag.Strong,
+      Tag.Beardy,
+      Tag.Tall,
     ],
   },
 ];

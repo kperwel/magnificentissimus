@@ -1,4 +1,4 @@
-.level {
+.generation {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -6,7 +6,7 @@
     margin-bottom: 20px;
 }
 
-.level+.level:before {
+.generation+.generation:before {
     content: "";
     display: block;
     height: 5px;
@@ -18,7 +18,7 @@
     top: 0;
 }
 
-.level+.level:after {
+.generation+.generation:after {
     content: "";
     display: block;
     width: 5px;

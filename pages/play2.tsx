@@ -1,7 +1,7 @@
 import styles from "@/styles/Home.module.css";
 
 import { Dancing_Script, Marck_Script, Short_Stack } from "@next/font/google";
-import { Unit } from "@/components/Unit";
+import { Fork } from "@/components/Fork";
 import { tasks } from "@/model/tasks";
 import { Tree } from "@/components/Tree";
 import {
@@ -13,7 +13,7 @@ import {
 import { AttributeCard } from "@/components/AttributeCard";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  Attribute,
+  Tag,
   createTitle,
   getAllAttributes,
   Person,
@@ -33,8 +33,8 @@ const shortStack = Dancing_Script({
 });
 
 export default function Home() {
-  const [used, setUsed] = useState<Array<[number, Attribute]>>([]);
-  const [activeId, setActiveId] = useState<Attribute | null>(null);
+  const [used, setUsed] = useState<Array<[number, Tag]>>([]);
+  const [activeId, setActiveId] = useState<Tag | null>(null);
   const mainRef = useRef<HTMLElement | null>(null);
 
   const [currentTask, setCurrentTask] = useState(0);
@@ -71,13 +71,13 @@ export default function Home() {
   }, []);
 
   function handleDragStart(event: DragStartEvent) {
-    const attribute: Attribute = event.active.data.current!.attribute;
+    const attribute: Tag = event.active.data.current!.attribute;
     sounds.play("shuffle");
     setActiveId(attribute);
   }
 
   function handleDragEnd(event: DragEndEvent) {
-    const attribute: Attribute = event.active.data.current!.attribute;
+    const attribute: Tag = event.active.data.current!.attribute;
     if (event.over && event.over.data.current) {
       const personId = event.over.data.current.id as number;
       sounds.play("shuffle2");
@@ -105,7 +105,7 @@ export default function Home() {
           className={`${styles.main} ${shortStack.className}`}
         >
           <Tree>
-            <Unit person={state} first={true} />
+            <Fork person={state} first={true} />
           </Tree>
           <div className={styles.attributes}>
             <div className={styles.wrapper}>
@@ -152,7 +152,7 @@ export default function Home() {
 function changeAttribute(
   person: Person,
   personId: number,
-  attribute: Attribute
+  attribute: Tag
 ): Person {
   if (person.id === personId) {
     return {

@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { Attribute } from "@/model/Person";
+import { Tag } from "@/model/Person";
 
 import styles from "./styles.module.css";
 
@@ -9,7 +9,7 @@ export function Draggable({
   attribute,
 }: {
   children: ReactNode;
-  attribute: Attribute;
+  attribute: Tag;
 }) {
   const { attributes, listeners, setNodeRef, transform, active } = useDraggable({
     id: attribute,

@@ -1,9 +1,9 @@
-.unit {
+.fork {
     flex-grow: 1;
     flex-shrink: 0;
 }
 
-.group {
+.branch {
     display: flex;
     justify-content: center;
     width: 50%;

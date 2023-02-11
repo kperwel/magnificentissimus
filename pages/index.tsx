@@ -1,8 +1,8 @@
 import { AttributeCard } from "@/components/AttributeCard";
 import { Tree } from "@/components/Tree";
-import { Unit } from "@/components/Unit";
-import { Attribute } from "@/model/Person";
-import { wizard } from "@/model/persons";
+import { Fork } from "@/components/Fork";
+import { Tag } from "@/model/Person";
+import { example } from "@/model/persons";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import Head from "next/head";
 
@@ -22,41 +22,38 @@ export default function Home() {
         <main className={styles.main}>
           <div className={styles.viewport}>
             <div className={styles.viewportInside}>
-              <Unit first person={wizard} />
+              <Fork first person={example} />
             </div>
           </div>
           <div className={styles.drawer}>
             <ul className={styles.attributesList}>
               <li>
-                <AttributeCard attribute={Attribute.Bad} />
+                <AttributeCard attribute={Tag.Bad} />
               </li>
               <li>
-                <AttributeCard attribute={Attribute.Good} />
+                <AttributeCard attribute={Tag.Good} />
               </li>
               <li>
-                <AttributeCard attribute={Attribute.Conqueror} />
+                <AttributeCard attribute={Tag.Conqueror} />
               </li>
               <li>
-                <AttributeCard attribute={Attribute.Beardy} />
+                <AttributeCard attribute={Tag.Beardy} />
               </li>
               <li>
-                <AttributeCard attribute={Attribute.Debug} />
+                <AttributeCard attribute={Tag.Fat} />
               </li>
               <li>
-                <AttributeCard attribute={Attribute.Fat} />
+                <AttributeCard attribute={Tag.Evil} />
               </li>
               <li>
-                <AttributeCard attribute={Attribute.Evil} />
-              </li>
-              <li>
-                <AttributeCard attribute={Attribute.Jumpy} />
+                <AttributeCard attribute={Tag.Jumpy} />
               </li>
             </ul>
           </div>
         </main>
 
         <DragOverlay>
-          <AttributeCard attribute={Attribute.Bad} />
+          <AttributeCard attribute={Tag.Bad} />
         </DragOverlay>
       </DndContext>
     </>
