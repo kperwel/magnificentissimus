@@ -6,7 +6,7 @@ import { createTitle, Person } from "@/model/Person";
 
 export const Leaf = ({ person }: { person: Person }) => {
   return (
-    <Droppable id={person.id}>
+    <Droppable payload={person}>
       <article className={`${styles.leaf}`}>
         {false ? <TextBubble text="Text" style={BubbleStyle.Warning} /> : null}
         {false ? <TextBubble text="Text" style={BubbleStyle.Sucess} /> : null}

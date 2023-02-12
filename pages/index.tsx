@@ -8,20 +8,30 @@ import styles from "../styles/Game.module.css";
 import { example } from "@/model/data";
 import { Tag } from "@/model/Tag";
 import { useState } from "react";
+import { Person } from "@/model/Person";
 
 export default function Home() {
   const [ dragging, setDragging ] = useState<Tag | null>(null);
+  const [ task, setTask ] = useState(example);
 
   const onDragStart = (event: DragStartEvent) => {
-    const data = event.active.data as DataRef<{ attribute: Tag }>;
+    const data = event.active.data as DataRef<{ id: Tag }>;
 
-    if (data.current?.attribute) {
-      setDragging(data.current.attribute);
+    if (data.current?.id) {
+      setDragging(data.current.id);
     }
   }
 
   const onDragEnd = (event: DragEndEvent) => {
     console.log("onDragEnd", event);
+    const draggedData = event.active.data as DataRef<{ id: Tag } | undefined>;
+    const droppedData = event.over?.data as DataRef<Person>;
+    const person = droppedData?.current;
+    const tag = draggedData.current?.id
+
+    if (person && tag) {
+      person.tag = tag;
+    }
     setDragging(null);
   }
 
@@ -38,10 +48,13 @@ export default function Home() {
       <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
         <main className={styles.main}>
           <Camera>
-              <Fork person={example} />
+              <Fork person={task} />
           </Camera>
           <div className={styles.drawer}>
             <ul className={styles.attributesList}>
+              <li>
+                <AttributeCard attribute={Tag.Tall} />
+              </li>
               <li>
                 <AttributeCard attribute={Tag.Bad} />
               </li>

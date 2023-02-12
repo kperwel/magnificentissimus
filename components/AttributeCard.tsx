@@ -5,7 +5,7 @@ import styles from "./AttributeCard.module.css";
 import { Draggable } from "./dnd/Draggable";
 export function AttributeCard({ attribute }: { attribute: Tag }) {
   return (
-    <Draggable attribute={attribute}>
+    <Draggable payload={{ id: attribute }}>
       <article className={styles.card}>
         <AttributeSVG name={attribute} />
       </article>

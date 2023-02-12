@@ -2,21 +2,18 @@ import React, { ReactNode } from "react";
 import { useDraggable } from "@dnd-kit/core";
 
 import styles from "./styles.module.css";
-import { Tag } from "@/model/Tag";
 
-export function Draggable({
+export function Draggable<T extends { id: number | string }>({
   children,
-  attribute,
+  payload,
 }: {
   children: ReactNode;
-  attribute: Tag;
+  payload: T;
 }) {
   const { attributes, listeners, setNodeRef, transform, active } = useDraggable(
     {
-      id: attribute,
-      data: {
-        attribute,
-      },
+      id: payload.id,
+      data: payload,
     }
   );
   const style = transform
