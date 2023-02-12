@@ -1,6 +1,8 @@
 import { createMapper } from "./utils/map";
 
 
+
+
 export enum Tag {
   Strong = "Strong",
   Tall = "Tall",
@@ -23,11 +25,13 @@ export enum Tag {
   Slim = "Slim",
   Magician = "Magician",
   NotDefined = "NotDefined",
-  Monster = "Monster"
+  Monster = "Monster",
+  Lawful = "Lawful"
 }
 
 export const mapper = createMapper<Tag>(
   [[Tag.Bad, Tag.Bad], Tag.Evil],
+  [[Tag.Good, Tag.Good], Tag.Lawful],
   [[Tag.Evil, Tag.Giant], Tag.Monster],
   [[Tag.Tall, Tag.Tall], Tag.Giant],
   [[Tag.Beardy, Tag.Wisdom], Tag.Sage],

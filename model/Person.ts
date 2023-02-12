@@ -1,7 +1,6 @@
 import { male } from "./names";
 import { combineTags, Tag } from "./Tag";
 
-
 export class Person {
   private static id = 0;
   private static getId() {
@@ -20,9 +19,13 @@ export class Person {
     if (this.parents.length === 0) {
       return null;
     }
-  
+
     const parentAttributes = this.parents.flatMap((p) => p.all);
     return combineTags(parentAttributes);
+  }
+
+  public get assignable() {
+    return this.parents.length === 0;
   }
 
   public get all() {
@@ -40,7 +43,11 @@ export class Person {
   }
 
   public set tag(tag: Tag) {
-    this.assigned = tag;
+    if (this.assignable) {
+      this.assigned = tag;
+    } else {
+      console.warn("Cannot assign tag to not last in the tree");
+    }
   }
 
   constructor(tag: Tag | null = null, parents: Array<Person> = []) {
@@ -50,4 +57,3 @@ export class Person {
 }
 
 export const createTitle = (tag: Tag) => tag;
-
