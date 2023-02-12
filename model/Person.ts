@@ -13,17 +13,16 @@ export class Person {
 
   public readonly id: number = Person.getId();
   public readonly name: string = Person.getName();
-
   public readonly parents: Array<Person> = [];
+  private assigned: Tag | null = null;
 
-  public assigned: Tag | null = null;
   public get inherited(): Tag {
     const parentAttributes = this.parents.flatMap((p) => p.all);
     return combineTags(parentAttributes);
   }
+
   public get all() {
     const all = [];
-    console.log(this.assigned, this.inherited);
 
     if (this.assigned) {
       all.push(this.assigned);
@@ -34,6 +33,10 @@ export class Person {
     }
 
     return combineTags(all);
+  }
+
+  public set tag(tag: Tag) {
+    this.assigned = tag;
   }
 
   constructor(tag: Tag | null = null, parents: Array<Person> = []) {

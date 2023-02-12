@@ -1,0 +1,8 @@
+.camera {
+  flex: 1;
+  display: flex;
+}
+
+.camera > * {
+  flex: 1;
+}

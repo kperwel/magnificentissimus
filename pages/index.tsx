@@ -1,5 +1,5 @@
 import { AttributeCard } from "@/components/AttributeCard";
-import { Tree } from "@/components/Tree";
+import { Camera } from "@/components/Camera";
 import { Fork } from "@/components/Fork";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import Head from "next/head";
@@ -20,11 +20,9 @@ export default function Home() {
       </Head>
       <DndContext>
         <main className={styles.main}>
-          <div className={styles.viewport}>
-            <div className={styles.viewportInside}>
+          <Camera>
               <Fork first person={example} />
-            </div>
-          </div>
+          </Camera>
           <div className={styles.drawer}>
             <ul className={styles.attributesList}>
               <li>

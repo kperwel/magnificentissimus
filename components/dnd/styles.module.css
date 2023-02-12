@@ -6,8 +6,7 @@
 .drag {
     width: 100%;
     opacity: 0;
-    height: 50%;
-    background: red;
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
