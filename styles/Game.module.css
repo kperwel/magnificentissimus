@@ -11,7 +11,9 @@
     overflow: scroll;
 }
 
-.viewport {
-    flex: 1;
-    overflow: scroll;
+.drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

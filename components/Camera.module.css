@@ -2,13 +2,19 @@
   display: flex;
   flex: 1;
   width: 100%;
-  height: calc(100% - 190px)
+  height: 100%;
+}
+
+.inside > * {
+  min-width: max-content;
+  width: 100%;
+}
+
+.inside {
+  min-width: max-content;
+  width: 100%;
 }
 
 .camera > * {
   flex: 1;
-}
-
-.inside {
-  min-width: 800px;
 }

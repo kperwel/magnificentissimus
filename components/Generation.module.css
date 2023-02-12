@@ -4,6 +4,7 @@
     width: 100%;
     position: relative;
     margin-bottom: 20px;
+    justify-content: space-around;
 }
 
 .generation+.generation:before {
