@@ -16,7 +16,11 @@ export class Person {
   public readonly parents: Array<Person> = [];
   private assigned: Tag | null = null;
 
-  public get inherited(): Tag {
+  public get inherited(): Tag | null {
+    if (this.parents.length === 0) {
+      return null;
+    }
+  
     const parentAttributes = this.parents.flatMap((p) => p.all);
     return combineTags(parentAttributes);
   }

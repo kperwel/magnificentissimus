@@ -21,6 +21,7 @@ export enum Tag {
     Tyrant = "Tyrant",
     Slim = "Slim",
     Magician = "Magician",
+    NotDefined = "NotDefined",
   }
 
 export const mapper = createMapper<Tag>(
@@ -36,5 +37,5 @@ export const combineTags = (attributes: Array<Tag>): Tag => {
   if (attributes.length === 1) {
     return attributes[0];
   }
-  return mapper.get(attributes);
+  return mapper.get(attributes) ?? Tag.NotDefined;
 };

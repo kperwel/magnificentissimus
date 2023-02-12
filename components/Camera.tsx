@@ -20,8 +20,16 @@ export const Camera = ({ children }: { children: ReactNode }) => {
   };
   return (
     <div className={styles.camera}>
-      <QuickPinchZoom onUpdate={onUpdate}>
-        <div className={styles.inside} ref={ref}>{children}</div>
+      <QuickPinchZoom
+        onUpdate={onUpdate}
+        verticalPadding={10}
+        maxZoom={2}
+        
+        horizontalPadding={10}
+      >
+        <div className={styles.inside} ref={ref}>
+          {children}
+        </div>
       </QuickPinchZoom>
     </div>
   );
