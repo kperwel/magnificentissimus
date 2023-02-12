@@ -8,7 +8,7 @@ export class Person {
     return Person.id++;
   }
   private static getName() {
-    return male[Person.id];
+    return male.at(Person.id) ?? "End of Names";
   }
 
   public readonly id: number = Person.getId();
@@ -50,3 +50,4 @@ export class Person {
 }
 
 export const createTitle = (tag: Tag) => tag;
+
