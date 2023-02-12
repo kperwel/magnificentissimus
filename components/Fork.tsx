@@ -3,29 +3,22 @@ import { Leaf } from "./Leaf";
 import styles from "./Fork.module.css";
 import { Person } from "@/model/Person";
 
-export const Fork = ({ person, first = false }: { person: Person, first: boolean }) => {
+export const Fork = ({ person }: { person: Person }) => {
   const currentTitle = person.all.toString();
   const targetTitle = person.all.toString();
   return (
     <div className={styles.fork}>
       <Generation>
-        <Leaf
-          last={!person.parents}
-          first={first}
-          queen={false}
-          id={person.id}
-          success={currentTitle === targetTitle}
-          imNot={currentTitle}
-          name={`${person.name} ${targetTitle ? targetTitle : currentTitle}`} />
+        <Leaf person={person} />
       </Generation>
-      {person.parents ? (
+      {person.parents.length > 0 ? (
         <Generation>
           {person.parents?.map((p) => (
             <div key={p.id} className={styles.branch}>
               {p !== null ? (
-                <Fork person={p} first={false} />
+                <Fork person={p} />
               ) : (
-                <Leaf last={false} first={false} id={-1} name={"unknown"} success={false} queen={false} />
+                <Leaf person={p} />
               )}
             </div>
           ))}

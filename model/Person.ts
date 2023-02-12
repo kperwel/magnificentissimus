@@ -49,4 +49,4 @@ export class Person {
   }
 }
 
-export const createTitle = (tags: Array<Tag>) => tags.join(" ");
+export const createTitle = (tag: Tag) => tag;

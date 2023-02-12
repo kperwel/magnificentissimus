@@ -1,14 +1,31 @@
 import { AttributeCard } from "@/components/AttributeCard";
 import { Camera } from "@/components/Camera";
 import { Fork } from "@/components/Fork";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import { DataRef, DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core";
 import Head from "next/head";
 
 import styles from "../styles/Game.module.css";
 import { example } from "@/model/data";
 import { Tag } from "@/model/Tag";
+import { useState } from "react";
 
 export default function Home() {
+  const [ dragging, setDragging ] = useState<Tag | null>(null);
+
+  const onDragStart = (event: DragStartEvent) => {
+    const data = event.active.data as DataRef<{ attribute: Tag }>;
+
+    if (data.current?.attribute) {
+      setDragging(data.current.attribute);
+    }
+  }
+
+  const onDragEnd = (event: DragEndEvent) => {
+    console.log("onDragEnd", event);
+    setDragging(null);
+  }
+
+
   return (
     <>
       <Head>
@@ -18,10 +35,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
-      <DndContext>
+      <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
         <main className={styles.main}>
           <Camera>
-              <Fork first person={example} />
+              <Fork person={example} />
           </Camera>
           <div className={styles.drawer}>
             <ul className={styles.attributesList}>
@@ -51,7 +68,7 @@ export default function Home() {
         </main>
 
         <DragOverlay>
-          <AttributeCard attribute={Tag.Bad} />
+          { dragging !== null ? <AttributeCard attribute={dragging} /> : null}
         </DragOverlay>
       </DndContext>
     </>

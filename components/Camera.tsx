@@ -22,10 +22,10 @@ export const Camera = ({ children }: { children: ReactNode }) => {
     <div className={styles.camera}>
       <QuickPinchZoom
         onUpdate={onUpdate}
-        verticalPadding={10}
+        verticalPadding={100}
         maxZoom={2}
-        
-        horizontalPadding={10}
+        doubleTapZoomOutOnMaxScale
+        horizontalPadding={100}
       >
         <div className={styles.inside} ref={ref}>
           {children}
