@@ -21,11 +21,16 @@ export const createMapper = <T extends string>(
     console.log("%c# End of tags definition", "color: blue; font-weight: bold");
   };
 
+  const getRaw = () => {
+    return Object.values(map);
+  }
+
   mappings.forEach((mapping) => set(...mapping));
 
   return {
     get,
     set,
+    getRaw,
     prettyPrint,
   };
 };

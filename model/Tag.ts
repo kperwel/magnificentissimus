@@ -1,8 +1,4 @@
 import { createMapper } from "./utils/map";
-
-
-
-
 export enum Tag {
   Strong = "Strong",
   Tall = "Tall",
@@ -46,3 +42,5 @@ export const combineTags = (attributes: Array<Tag>): Tag => {
   }
   return mapper.get(attributes) ?? Tag.NotDefined;
 };
+
+export function getPair(tag: Tag) { return mapper.getRaw().find((t) => t[1] === tag); }

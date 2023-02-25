@@ -1,3 +1,21 @@
+import { Person } from "./Person";
+import { getAtLooped } from "./utils/array";
+import { getRandomBetween } from "./utils/numbers";
+
+export const getMaleName = (at: number) => {
+  return getAtLooped(male, at)
+};
+
+export const getFemaleName = (at: number) => {
+  return getAtLooped(female, at)
+};
+
+export const getNameFor = (person: Person) => {
+  return getMaleName(person.id);
+};
+
+export const getNamesSeed = () => getRandomBetween(0, Math.max(male.length, female.length));
+
 export const male = [
   "Alaric",
   "Aldous",

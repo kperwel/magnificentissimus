@@ -1,24 +1,23 @@
 import { Generation } from "./Generation";
 import { Leaf } from "./Leaf";
 import styles from "./Fork.module.css";
-import { Person } from "@/model/Person";
+import { getPair, Tag } from "@/model/Tag";
 
-export const Fork = ({ person }: { person: Person }) => {
-  const currentTitle = person.all.toString();
-  const targetTitle = person.all.toString();
+export const Fork = ({ tag, id = 1 }: { tag: Tag, id?: number }) => {
+  const [parents] = getPair(tag) ?? [null, null];
   return (
     <div className={styles.fork}>
       <Generation>
-        <Leaf person={person} />
+        <Leaf tag={tag} id={id} />
       </Generation>
-      {person.parents.length > 0 ? (
+      {parents !== null ? (
         <Generation>
-          {person.parents?.map((p) => (
-            <div key={p.id} className={styles.branch}>
+          {parents.map((p, key) => (
+            <div key={key + p} className={styles.branch}>
               {p !== null ? (
-                <Fork person={p} />
+                <Fork tag={p} id={id * 2 + key} />
               ) : (
-                <Leaf person={p} />
+                <Leaf tag={p} id={id * 2 + key} />
               )}
             </div>
           ))}

@@ -15,6 +15,10 @@
     position: relative;
 }
 
+.attributesList > li {
+    list-style: none;
+}
+
 .drawer {
     position: fixed;
     bottom: 0;

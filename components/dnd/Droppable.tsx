@@ -5,11 +5,14 @@ import styles from "./styles.module.css";
 export function Droppable<Payload extends { id: string | number }>({
   children,
   payload,
+  disabled = false,
 }: {
-  children: ReactNode;
+  children: (isOver: boolean) => ReactNode;
+  disabled: boolean;
   payload: Payload;
 }) {
   const { isOver, setNodeRef } = useDroppable({
+    disabled,
     id: payload.id,
     data: payload,
   });
@@ -20,7 +23,7 @@ export function Droppable<Payload extends { id: string | number }>({
   };
   return (
     <div className={styles.droppable} ref={setNodeRef} style={style}>
-      {children}
+      {children(isOver)}
     </div>
   );
 }
